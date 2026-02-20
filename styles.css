@@ -175,33 +175,20 @@ svg {
 }
 
 /* Questionnaire Specific Buttons */
-.btn--q-orange {
-    background: var(--orange);
-    color: var(--white);
-    border: none;
-    border-radius: 30px;
-    box-shadow: 0 4px 12px rgba(234, 108, 0, 0.4);
-    font-weight: 600;
-}
-
-.btn--q-orange:hover {
-    background: var(--orange-hover);
-    box-shadow: 0 6px 16px rgba(234, 108, 0, 0.5);
-    transform: translateY(-2px);
-}
-
+.btn--q-orange,
 .btn--q-navy {
-    background: #3c4b64;
+    background: var(--navy);
     color: var(--white);
     border: none;
     border-radius: 30px;
-    box-shadow: 0 4px 12px rgba(60, 75, 100, 0.5);
+    box-shadow: 0 4px 12px rgba(26, 58, 92, 0.4);
     font-weight: 600;
 }
 
+.btn--q-orange:hover,
 .btn--q-navy:hover {
-    background: #2a3546;
-    box-shadow: 0 6px 16px rgba(60, 75, 100, 0.6);
+    background: var(--navy-light);
+    box-shadow: 0 6px 16px rgba(44, 82, 130, 0.5);
     transform: translateY(-2px);
 }
 
