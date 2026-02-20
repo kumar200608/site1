@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const next = e.currentTarget.getAttribute('data-next');
 
             // Special handling for the URL Step (1-2b)
-            if (next === '1-3' && e.currentTarget.closest('#step-1-2b')) {
+            if (next === 'url-removal' && e.currentTarget.closest('#step-1-2b')) {
                 const urlInput = document.getElementById('content-url');
                 if (urlInput && urlInput.value.trim() !== '') {
                     const btnEl = e.currentTarget;
@@ -295,15 +295,41 @@ document.addEventListener('DOMContentLoaded', () => {
                                 resultDiv.style.backgroundColor = '#fef2f2';
                                 resultDiv.style.borderColor = '#fca5a5';
                                 resultDiv.style.color = '#b91c1c';
-                                resultDiv.innerHTML = '⚠️ Content flagged as potentially sensitive.';
+                                resultDiv.innerHTML = '⚠️ Content flagged as sensitive block.';
 
-                                // Let the user read the result before auto-advancing
+                                // Let the user read the result before auto-advancing to the removal dashboard
                                 setTimeout(() => {
                                     resultDiv.style.display = 'none'; // reset for next time
-                                    showStep(next);
+                                    showStep('url-removal');
+
+                                    // Start the cascading removal animation
+                                    setTimeout(() => {
+                                        const el = document.getElementById('status-google');
+                                        if (el) { el.textContent = 'Removed ✓'; el.style.color = '#16a34a'; }
+                                    }, 1500);
+
+                                    setTimeout(() => {
+                                        const el = document.getElementById('status-insta');
+                                        if (el) { el.textContent = 'Removed ✓'; el.style.color = '#16a34a'; }
+                                    }, 3000);
+
+                                    setTimeout(() => {
+                                        const el = document.getElementById('status-whatsapp');
+                                        if (el) { el.textContent = 'Removed ✓'; el.style.color = '#16a34a'; }
+
+                                        // Activate Continue button
+                                        const finishBtn = document.getElementById('finish-removal-btn');
+                                        if (finishBtn) {
+                                            finishBtn.style.opacity = '1';
+                                            finishBtn.style.pointerEvents = 'auto';
+                                            finishBtn.textContent = 'Continue';
+                                            finishBtn.disabled = false;
+                                        }
+                                    }, 4500);
+
                                 }, 1200);
                             } else {
-                                showStep(next);
+                                showStep('url-removal');
                             }
                         } else {
                             btnEl.textContent = `Scanning URL... ${scanProgress}%`;
@@ -311,6 +337,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     }, 40); // 40ms * ~25 ticks = ~1 second scan
 
                     return; // Prevent immediate navigation
+                } else {
+                    // If no URL, skip the removal step entirely
+                    showStep('1-3');
+                    return;
                 }
             }
 
