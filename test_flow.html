@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+    const caseData = {
+        caseNum: "SHI-TEST1234",
+        password: "Password123",
+        dateCreated: "January 1, 2026",
+        hashes: [{name: "test.jpg", hash: "abcdef1234567890", type: "image", status: "Monitoring"}]
+    };
+    let allCases = {};
+    allCases["SHI-TEST1234"] = caseData;
+    localStorage.setItem("safeher_cases", JSON.stringify(allCases));
+    document.write("<h1>Test Case Saved to LocalStorage</h1>");
+    document.write("<pre>" + localStorage.getItem("safeher_cases") + "</pre>");
+</script>
+</body>
+</html>

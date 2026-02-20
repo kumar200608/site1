@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Case | SafeHer India</title>
+    <meta name="description"
+        content="Create a case to protect your intimate images from being shared online without your consent.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="top-bar">
+        <div class="top-bar__inner">
+            <a href="index.html" class="logo">
+                <span class="logo__name"><span class="logo__stop">Safe</span><span class="logo__ncii">Her</span><span
+                        class="logo__org"> India</span></span>
+                <span class="logo__tagline">Stop Non-Consensual Intimate Image Abuse</span>
+            </a>
+            <div class="top-bar__actions">
+                <a href="privacy-policy.html" class="top-bar__link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" />
+                        <path d="M7 11V7a5 5 0 0110 0v4" />
+                    </svg>
+                    Privacy Policy
+                </a>
+                <a href="create-case.html" class="btn btn--primary">Create Your Case</a>
+            </div>
+            <button class="hamburger" id="hamburger"
+                aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+    <nav class="nav-bar" id="nav-bar">
+        <ul class="nav-bar__list">
+            <li><a href="check-status.html">Check Case Status</a></li>
+            <li><a href="resources.html">Resources and Support</a></li>
+            <li><a href="how-it-works.html">How It Works</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+        </ul>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="page-content">
+        <div class="page-hero">
+            <h1>Create Your Case</h1>
+        </div>
+
+        <section class="wizard-section">
+            <div class="section-container">
+
+                <!-- Progress Bar matching screenshots -->
+                <div class="wizard-header"
+                    style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 30px;">
+                    <h2 style="margin: 0; font-size: 2rem;">Create Your Case</h2>
+                    <div class="wizard-progress-bar" style="width: 150px; text-align: right;">
+                        <div id="progress-text" style="font-size: 0.9rem; font-weight: 600; margin-bottom: 8px;">1 / 8
+                            (12%)</div>
+                        <div
+                            style="width: 100%; background: #eee; height: 6px; border-radius: 3px; display: flex; justify-content: flex-start;">
+                            <div id="progress-fill"
+                                style="width: 12.5%; background: #3c4b64; height: 100%; border-radius: 3px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q-STEP 1: Age -->
+                <div class="wizard-step active" id="step-1-1">
+                    <p style="font-size: 1.1rem; margin-bottom: 30px;">What is your age in the image(s)/video(s) you
+                        want to submit?</p>
+                    <div style="display: flex; gap: 15px;">
+                        <button class="btn btn--primary btn--large q-btn" data-next="disqualified-under18"
+                            style="background-color: #3c4b64; border-color: #3c4b64; flex: 1;">Under 18</button>
+                        <button class="btn btn--primary btn--large q-btn" data-next="1-2"
+                            style="background-color: #3c4b64; border-color: #3c4b64; flex: 1;">18 or over</button>
+                    </div>
+                </div>
+
+                <!-- Q-STEP 2: Depicted (Filling the gap) -->
+                <div class="wizard-step" id="step-1-2" style="display:none">
+                    <p style="font-size: 1.1rem; margin-bottom: 30px;">Help us understand what is in the
+                        image(s)/video(s) so we can be sure this is the correct service for you:</p>
+                    <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 30px;">Who is in the
+                        image(s)/video(s)?</p>
+                    <div style="display: flex; gap: 15px;">
+                        <button class="btn btn--primary btn--large q-btn" data-next="1-3"
+                            style="background-color: #3c4b64; border-color: #3c4b64; flex: 1;">Me</button>
+                        <button class="btn btn--primary btn--large q-btn" data-next="1-3"
+                            style="background-color: #3c4b64; border-color: #3c4b64; flex: 1;">Someone else</button>
+                    </div>
+                </div>
+
+                <!-- Q-STEP 3: Place -->
+                <div class="wizard-step" id="step-1-3" style="display:none">
+                    <p style="font-size: 1.1rem; margin-bottom: 30px;">Help us understand what is in the
+                        image(s)/video(s) so we can be sure this is the correct service for you:</p>
+                    <div style="display: flex; gap: 15px;">
+                        <button class="btn btn--primary btn--large q-btn" data-next="1-4"
+                            style="background-color: #3c4b64; border-color: #3c4b64; flex: 1;">I am in a public
+                            place</button>
+                        <button class="btn btn--primary btn--large q-btn" data-next="1-4"
+                            style="background-color: #3c4b64; border-color: #3c4b64; flex: 1;">I am in a private
+                            place</button>
+                    </div>
+                </div>
+
+                <!-- Q-STEP 4: Nudity -->
+                <div class="wizard-step" id="step-1-4" style="display:none">
+                    <p style="font-size: 1.1rem; margin-bottom: 30px;">Help us understand what is in the
+                        image(s)/video(s) so we can be sure this is the correct service for you:</p>
+                    <div style="display: flex; gap: 15px;">
+                        <!-- Highlighted button style for primary choice as seen in screenshots -->
+                        <button class="btn btn--primary btn--large q-btn" data-next="1-5"
+                            style="background-color: #ea6c00; border-color: #ea6c00; flex: 1;">I am nude or semi
+                            nude</button>
+                        <button class="btn btn--primary btn--large q-btn" data-next="1-5"
+                            style="background-color: #3c4b64; border-color: #3c4b64; flex: 1;">I am fully
+                            clothed</button>
+                    </div>
+                </div>
+
+                <!-- Q-STEP 5: Sexual Act -->
+                <div class="wizard-step" id="step-1-5" style="display:none">
+                    <p style="font-size: 1.1rem; margin-bottom: 15px;">Help us understand what is in the
+                        image(s)/video(s) so we can be sure this is the correct service for you:</p>
+                    <p style="font-size: 1.1rem; margin-bottom: 30px;">I am engaging in a sexual act:</p>
+                    <div style="display: flex; gap: 15px; width: 50%;">
+                        <button class="btn btn--primary btn--large q-btn" data-next="2"
+                            style="background-color: #ea6c00; border-color: #ea6c00; flex: 1;">Yes</button>
+                        <button class="btn btn--primary btn--large q-btn" data-next="2"
+                            style="background-color: #3c4b64; border-color: #3c4b64; flex: 1;">No</button>
+                    </div>
+                </div>
+
+                <!-- STEP 1B: Disqualified screens (hidden) -->
+                <div class="wizard-step" id="step-disqualified-under18" style="display:none">
+                    <div class="wizard-card wizard-card--error">
+                        <h2>We Are Sorry</h2>
+                        <p>We cannot help with your case. If you are under 18 in the content, please contact the <a
+                                href="https://takeitdown.ncmec.org/" target="_blank" rel="noopener">National Center for
+                                Missing and Exploited Children</a> or <a href="https://www.iwf.org.uk/" target="_blank"
+                                rel="noopener">Internet Watch Foundation</a> for help.</p>
+                        <p>If you are outside the UK, <a href="resources.html">visit this page</a> to find resources for
+                            the country you are in.</p>
+                    </div>
+                </div>
+
+                <!-- STEP 2: File Upload -->
+                <div class="wizard-step" id="step-2">
+                    <div class="wizard-card">
+                        <h2>Select Your Images/Videos</h2>
+                        <p>Select the image(s)/video(s) on your device that you would like to protect. Remember, your
+                            image(s)/video(s) do not leave your device, they will only be scanned so a unique "hash," or
+                            digital fingerprint, can be generated.</p>
+                        <p class="text-muted">You can select up to 20 photos/videos per case.</p>
+
+                        <div class="upload-zone" id="upload-zone">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="var(--gray-mid)"
+                                stroke-width="2">
+                                <path d="M24 32V16M24 16l-8 8M24 16l8 8" />
+                                <path d="M8 32v4a4 4 0 004 4h24a4 4 0 004-4v-4" />
+                            </svg>
+                            <p>Drag &amp; drop files here or <strong>click to browse</strong></p>
+                            <p class="text-muted">Accepted: jpeg, jpg, png, gif, bmp, mp4, mov, avi, wmv</p>
+                            <input type="file" id="file-input" multiple accept="image/*,video/*" style="display:none">
+                        </div>
+
+                        <div class="file-list" id="file-list"></div>
+
+                        <div class="wizard-nav">
+                            <button class="btn wizard-back" id="back-to-1">← Back</button>
+                            <button class="btn btn--primary wizard-next" id="to-step-3" disabled>Continue →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Password -->
+                <div class="wizard-step" id="step-3">
+                    <div class="wizard-card">
+                        <h2>Keeping track of your case</h2>
+                        <p>Please create a password to use to check your case status. Your password cannot be reset if
+                            lost or forgotten, it is not shared with SafeHer India or <a
+                                href="partners.html">participating
+                                companies</a>. Your password must be at least 10 characters long.</p>
+                        <p>You will be given a case number once you finish creating your case. Do not lose your case
+                            number
+                            or your password, you will not be able to look up your case by any other means.</p>
+
+                        <div class="form-group">
+                            <label for="case-password">Password</label>
+                            <input type="password" id="case-password" placeholder="At least 10 characters"
+                                minlength="10" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="case-password-confirm">Confirm Password</label>
+                            <input type="password" id="case-password-confirm" placeholder="Re-enter password"
+                                minlength="10" class="form-input">
+                        </div>
+
+                        <p>We can send you an email with your case number if you would like. To protect your privacy,
+                            your
+                            email address will not be stored on our servers or shared with anyone (including
+                            participating companies).</p>
+
+                        <div class="form-group">
+                            <label for="case-email">Email Address (Optional):</label>
+                            <input type="email" id="case-email" placeholder="your@email.com" class="form-input">
+                        </div>
+
+                        <div class="wizard-nav">
+                            <button class="btn wizard-back" id="back-to-2">← Back</button>
+                            <button class="btn btn--primary wizard-next" id="to-step-4" disabled>Continue →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 4: Review & Submit -->
+                <div class="wizard-step" id="step-4" style="display:none">
+                    <div class="wizard-card" style="border: none; padding: 0;">
+                        <h2 style="margin-bottom: 30px;">Review Your Case</h2>
+
+                        <div class="review-confirmations" style="margin-bottom: 30px;">
+                            <label class="checkbox-item" style="align-items: flex-start; margin-bottom: 20px;">
+                                <input type="checkbox" id="confirm-person"
+                                    style="accent-color: #ea6c00; width: 20px; height: 20px; margin-right: 15px; margin-top: 2px; cursor: pointer;">
+                                <span style="font-size: 1.1rem; color: #333;">I am the person in the image(s)/video(s)
+                                    I've selected</span>
+                            </label>
+                            <label class="checkbox-item" style="align-items: flex-start;">
+                                <input type="checkbox" id="confirm-age"
+                                    style="accent-color: #ea6c00; width: 20px; height: 20px; margin-right: 15px; margin-top: 2px; cursor: pointer;">
+                                <span style="font-size: 1.1rem; color: #333;">I was over 18 when the image(s)/video(s)
+                                    were taken</span>
+                            </label>
+                        </div>
+
+                        <div class="review-summary"
+                            style="background: #f8f9fa; padding: 25px; border-radius: 8px; margin-bottom: 30px;">
+                            <div class="review-item" style="margin-bottom: 15px; font-size: 1.1rem;">
+                                <strong>Email Address (Optional):</strong> <span id="review-email">Not provided</span>
+                            </div>
+                            <div class="review-item" style="font-size: 1.1rem;">
+                                <strong>Password:</strong> <span>********</span>
+                            </div>
+                        </div>
+
+                        <p style="font-size: 1.1rem; color: #4a5568; line-height: 1.6; margin-bottom: 20px;">If you
+                            enter an email address, your case number will be emailed to you. If you did not wish to
+                            provide your email, please be ready to write down or copy your case number that will appear
+                            on the next screen. Please also write down your Password.</p>
+
+                        <p style="font-size: 1.1rem; color: #4a5568; line-height: 1.6; margin-bottom: 40px;">If
+                            everything looks correct, and you consent to the processing and sharing of your hash(es)
+                            with <a href="partners.html"
+                                style="color: #ea6c00; text-decoration: underline;">participating companies</a>, click
+                            "Submit Case".</p>
+
+                        <div class="wizard-nav"
+                            style="display: flex; justify-content: space-between; align-items: center; border-top: 0; padding-top: 0;">
+                            <button class="btn wizard-back" id="back-to-3"
+                                style="background: white; border: 1px solid #e2e8f0; color: #4a5568; padding: 12px 24px; border-radius: 8px; font-weight: 600;">←
+                                Back</button>
+                            <button class="btn btn--primary btn--large wizard-next" id="submit-case" disabled
+                                style="background-color: #d96213; border-color: #d96213; border-radius: 30px; padding: 14px 32px; font-size: 1.1rem; font-weight: 700;">Submit
+                                Case</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 5: Success -->
+                <div class="wizard-step" id="step-success" style="display:none">
+                    <div class="wizard-card wizard-card--success" style="text-align: center;">
+                        <div class="success-icon" style="margin: 0 auto 20px; display: flex; justify-content: center;">
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#ea6c00"
+                                stroke-width="3">
+                                <circle cx="32" cy="32" r="28" />
+                                <path d="M20 32l8 8 16-16" />
+                            </svg>
+                        </div>
+                        <h2 style="font-size: 2rem; margin-bottom: 15px;">Case Created Successfully!</h2>
+                        <p style="font-size: 1.1rem; color: #4a5568; margin-bottom: 30px;">Your case has been created.
+                            Please save the information below — it cannot be recovered if lost.</p>
+
+                        <div class="case-info"
+                            style="background: #f8f9fa; border: 1px solid #e2e8f0; border-radius: 8px; padding: 25px; margin-bottom: 30px; text-align: left;">
+                            <div class="case-info__item" style="display: flex; flex-direction: column; gap: 10px;">
+                                <label style="font-weight: 600; color: #4a5568;">Case Number</label>
+                                <div
+                                    style="display: flex; align-items: center; justify-content: space-between; background: white; border: 1px solid #cbd5e1; padding: 10px 15px; border-radius: 4px;">
+                                    <div class="case-info__value" id="case-number-display"
+                                        style="font-family: monospace; font-size: 1.2rem; font-weight: 700; color: #2d3748;">
+                                        SHI-2026-XXXXXXXX</div>
+                                    <button class="btn btn--small" id="copy-case-number"
+                                        style="background: #f1f5f9; border: 1px solid #cbd5e1; color: #4a5568; padding: 5px 15px; border-radius: 4px; font-weight: 600; cursor: pointer;">Copy</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="case-warning"
+                            style="display: flex; gap: 15px; align-items: flex-start; background: #fff5f5; border: 1px solid #feb2b2; padding: 15px; border-radius: 8px; margin-bottom: 40px; text-align: left;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e53e3e"
+                                stroke-width="2" style="flex-shrink: 0; margin-top: 2px;">
+                                <path
+                                    d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                                <line x1="12" y1="9" x2="12" y2="13" />
+                                <line x1="12" y1="17" x2="12.01" y2="17" />
+                            </svg>
+                            <p style="margin: 0; color: #c53030; font-size: 1rem; line-height: 1.5;">Do not lose your
+                                case number or your password. You will not be able to look up your case by any other
+                                means.</p>
+                        </div>
+
+                        <div style="display: flex; gap: 15px; justify-content: center;">
+                            <a href="index.html" class="btn"
+                                style="background: white; border: 1px solid #cbd5e1; color: #4a5568; padding: 14px 28px; border-radius: 8px; font-weight: 600;">Back
+                                to Home</a>
+                            <a href="check-status.html" class="btn btn--primary"
+                                style="background-color: #3c4b64; border-color: #3c4b64; padding: 14px 28px; border-radius: 8px; font-weight: 600;">Check
+                                Case Status</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- NEED MORE + FOOTER -->
+    <section class="need-more">
+        <div class="section-container">
+            <h2>Need More?</h2>
+            <div class="need-more__grid">
+                <a href="privacy-policy.html" class="need-more__card">
+                    <div class="need-more__icon"><svg viewBox="0 0 48 48" width="48" height="48" fill="none"
+                            stroke="#fff" stroke-width="2">
+                            <rect x="8" y="6" width="32" height="36" rx="3" />
+                            <path d="M16 16h16 M16 22h16 M16 28h10" />
+                        </svg></div>
+                    <span>Privacy Policy</span>
+                </a>
+                <a href="resources.html" class="need-more__card">
+                    <div class="need-more__icon"><svg viewBox="0 0 48 48" width="48" height="48" fill="none"
+                            stroke="#fff" stroke-width="2">
+                            <path d="M10 40 L24 28 L38 40" />
+                            <path d="M14 32 L24 22 L34 32" />
+                            <circle cx="24" cy="14" r="6" />
+                        </svg></div>
+                    <span>Resources and Support</span>
+                </a>
+                <a href="faq.html" class="need-more__card">
+                    <div class="need-more__icon"><svg viewBox="0 0 48 48" width="48" height="48" fill="none"
+                            stroke="#fff" stroke-width="2">
+                            <circle cx="24" cy="24" r="18" />
+                            <path d="M18 18 C18 12, 30 12, 30 18 C30 22, 24 22, 24 26" />
+                            <circle cx="24" cy="32" r="1.5" fill="#fff" />
+                        </svg></div>
+                    <span>FAQ</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    <footer class="site-footer">
+        <p>Copyright 2026 SafeHer India</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
