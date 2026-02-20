@@ -270,33 +270,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 const urlInput = document.getElementById('content-url');
                 if (urlInput && urlInput.value.trim() !== '') {
                     const originalText = e.currentTarget.textContent;
-                    e.currentTarget.textContent = 'Scanning URL...';
                     e.currentTarget.disabled = true;
                     e.currentTarget.style.opacity = '0.7';
 
-                    // Simulate AI content detection scan (1.5 seconds)
-                    setTimeout(() => {
-                        e.currentTarget.textContent = originalText;
-                        e.currentTarget.disabled = false;
-                        e.currentTarget.style.opacity = '1';
+                    let scanProgress = 0;
+                    e.currentTarget.textContent = `Scanning URL... ${scanProgress}%`;
 
-                        const resultDiv = document.getElementById('url-scan-result');
-                        if (resultDiv) {
-                            resultDiv.style.display = 'block';
-                            resultDiv.style.backgroundColor = '#fef2f2';
-                            resultDiv.style.borderColor = '#fca5a5';
-                            resultDiv.style.color = '#b91c1c';
-                            resultDiv.innerHTML = '⚠️ Content flagged as potentially sensitive.';
+                    // Simulate AI content detection scan ticking from 0 to 100
+                    const scanInterval = setInterval(() => {
+                        scanProgress += Math.floor(Math.random() * 5) + 2; // Tick up by 2-6% randomly
 
-                            // Let the user read the result before auto-advancing
-                            setTimeout(() => {
-                                resultDiv.style.display = 'none'; // reset for next time
+                        if (scanProgress >= 100) {
+                            scanProgress = 100;
+                            clearInterval(scanInterval);
+
+                            e.currentTarget.textContent = originalText;
+                            e.currentTarget.disabled = false;
+                            e.currentTarget.style.opacity = '1';
+
+                            const resultDiv = document.getElementById('url-scan-result');
+                            if (resultDiv) {
+                                resultDiv.style.display = 'block';
+                                resultDiv.style.backgroundColor = '#fef2f2';
+                                resultDiv.style.borderColor = '#fca5a5';
+                                resultDiv.style.color = '#b91c1c';
+                                resultDiv.innerHTML = '⚠️ Content flagged as potentially sensitive.';
+
+                                // Let the user read the result before auto-advancing
+                                setTimeout(() => {
+                                    resultDiv.style.display = 'none'; // reset for next time
+                                    showStep(next);
+                                }, 1200);
+                            } else {
                                 showStep(next);
-                            }, 1200);
+                            }
                         } else {
-                            showStep(next);
+                            e.currentTarget.textContent = `Scanning URL... ${scanProgress}%`;
                         }
-                    }, 1500);
+                    }, 40); // 40ms * ~25 ticks = ~1 second scan
+
                     return; // Prevent immediate navigation
                 }
             }
