@@ -269,12 +269,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (next === '1-3' && e.currentTarget.closest('#step-1-2b')) {
                 const urlInput = document.getElementById('content-url');
                 if (urlInput && urlInput.value.trim() !== '') {
-                    const originalText = e.currentTarget.textContent;
-                    e.currentTarget.disabled = true;
-                    e.currentTarget.style.opacity = '0.7';
+                    const btnEl = e.currentTarget;
+                    const originalText = btnEl.textContent;
+                    btnEl.disabled = true;
+                    btnEl.style.opacity = '0.7';
 
                     let scanProgress = 0;
-                    e.currentTarget.textContent = `Scanning URL... ${scanProgress}%`;
+                    btnEl.textContent = `Scanning URL... ${scanProgress}%`;
 
                     // Simulate AI content detection scan ticking from 0 to 100
                     const scanInterval = setInterval(() => {
@@ -284,9 +285,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             scanProgress = 100;
                             clearInterval(scanInterval);
 
-                            e.currentTarget.textContent = originalText;
-                            e.currentTarget.disabled = false;
-                            e.currentTarget.style.opacity = '1';
+                            btnEl.textContent = originalText;
+                            btnEl.disabled = false;
+                            btnEl.style.opacity = '1';
 
                             const resultDiv = document.getElementById('url-scan-result');
                             if (resultDiv) {
@@ -305,7 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 showStep(next);
                             }
                         } else {
-                            e.currentTarget.textContent = `Scanning URL... ${scanProgress}%`;
+                            btnEl.textContent = `Scanning URL... ${scanProgress}%`;
                         }
                     }, 40); // 40ms * ~25 ticks = ~1 second scan
 
