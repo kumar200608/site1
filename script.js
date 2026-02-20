@@ -263,7 +263,44 @@ document.addEventListener('DOMContentLoaded', () => {
     // Dynamic questionnaire buttons
     document.querySelectorAll('.q-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const next = e.target.getAttribute('data-next');
+            const next = e.currentTarget.getAttribute('data-next');
+
+            // Special handling for the URL Step (1-2b)
+            if (next === '1-3' && e.currentTarget.closest('#step-1-2b')) {
+                const urlInput = document.getElementById('content-url');
+                if (urlInput && urlInput.value.trim() !== '') {
+                    const originalText = e.currentTarget.textContent;
+                    e.currentTarget.textContent = 'Scanning URL...';
+                    e.currentTarget.disabled = true;
+                    e.currentTarget.style.opacity = '0.7';
+
+                    // Simulate AI content detection scan (1.5 seconds)
+                    setTimeout(() => {
+                        e.currentTarget.textContent = originalText;
+                        e.currentTarget.disabled = false;
+                        e.currentTarget.style.opacity = '1';
+
+                        const resultDiv = document.getElementById('url-scan-result');
+                        if (resultDiv) {
+                            resultDiv.style.display = 'block';
+                            resultDiv.style.backgroundColor = '#fef2f2';
+                            resultDiv.style.borderColor = '#fca5a5';
+                            resultDiv.style.color = '#b91c1c';
+                            resultDiv.innerHTML = '⚠️ Content flagged as potentially sensitive.';
+
+                            // Let the user read the result before auto-advancing
+                            setTimeout(() => {
+                                resultDiv.style.display = 'none'; // reset for next time
+                                showStep(next);
+                            }, 1200);
+                        } else {
+                            showStep(next);
+                        }
+                    }, 1500);
+                    return; // Prevent immediate navigation
+                }
+            }
+
             if (next) showStep(next);
         });
     });
