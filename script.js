@@ -223,15 +223,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Map internal step strings to a logical step number for progress bar
     const stepProgressMap = {
-        '1-1': { num: 1, percent: 12 },
-        '1-2': { num: 2, percent: 25 },
-        '1-3': { num: 3, percent: 37 },
-        '1-4': { num: 4, percent: 50 },
-        '1-5': { num: 5, percent: 62 },
-        '2': { num: 6, percent: 75 }, // File Upload
-        '3': { num: 7, percent: 87 }, // Password
-        '4': { num: 8, percent: 100 }, // Review
-        'success': { num: 8, percent: 100 }
+        '1-1': { num: 1, percent: 11 },
+        '1-2': { num: 2, percent: 22 },
+        '1-2b': { num: 3, percent: 33 },
+        '1-3': { num: 4, percent: 44 },
+        '1-4': { num: 5, percent: 55 },
+        '1-5': { num: 6, percent: 66 },
+        '2': { num: 7, percent: 77 }, // File Upload
+        '3': { num: 8, percent: 88 }, // Password
+        '4': { num: 9, percent: 100 }, // Review
+        'success': { num: 9, percent: 100 }
     };
 
     function showStep(stepId) {
@@ -254,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const progFill = document.getElementById('progress-fill');
 
         if (progNode && progText && progFill) {
-            progText.textContent = `${progNode.num} / 8 (${progNode.percent}%)`;
+            progText.textContent = `${progNode.num} / 9 (${progNode.percent}%)`;
             progFill.style.width = `${progNode.percent}%`;
         }
     }
@@ -443,11 +444,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const pwd = document.getElementById('case-password').value;
             const email = document.getElementById('case-email').value;
+            const contentUrl = document.getElementById('content-url') ? document.getElementById('content-url').value : '';
 
             const caseData = {
                 case_number: caseNum,
                 password: pwd,
                 email: email,
+                content_url: contentUrl,
                 date_created: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
                 hashes: selectedFiles.map(f => ({
                     name: f.file.name,

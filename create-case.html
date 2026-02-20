@@ -93,11 +93,23 @@
                     <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 30px;">Who is in the
                         image(s)/video(s)?</p>
                     <div style="display: flex; gap: 15px;">
-                        <button class="btn btn--primary btn--large q-btn" data-next="1-3"
+                        <button class="btn btn--primary btn--large q-btn" data-next="1-2b"
                             style="background-color: #3c4b64; border-color: #3c4b64; flex: 1;">Me</button>
-                        <button class="btn btn--primary btn--large q-btn" data-next="1-3"
+                        <button class="btn btn--primary btn--large q-btn" data-next="1-2b"
                             style="background-color: #3c4b64; border-color: #3c4b64; flex: 1;">Someone else</button>
                     </div>
+                </div>
+
+                <!-- Q-STEP 2b: URL Input (New) -->
+                <div class="wizard-step" id="step-1-2b" style="display:none">
+                    <p style="font-size: 1.1rem; margin-bottom: 20px;">Help us understand what is in the
+                        image(s)/video(s) so we can be sure this is the correct service for you:</p>
+                    <p style="font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;">Do you have a URL/link where
+                        this content is currently being shared? (Optional)</p>
+                    <input type="url" id="content-url" placeholder="https://..." class="form-input"
+                        style="margin-bottom: 25px;">
+                    <button class="btn btn--primary btn--large q-btn" data-next="1-3"
+                        style="background-color: #ea6c00; border-color: #ea6c00; width: 100%;">Continue</button>
                 </div>
 
                 <!-- Q-STEP 3: Place -->
@@ -231,15 +243,15 @@
                         <h2 style="margin-bottom: 30px;">Review Your Case</h2>
 
                         <div class="review-confirmations" style="margin-bottom: 30px;">
-                            <label class="checkbox-item" style="align-items: flex-start; margin-bottom: 20px;">
-                                <input type="checkbox" id="confirm-person"
-                                    style="accent-color: #ea6c00; width: 20px; height: 20px; margin-right: 15px; margin-top: 2px; cursor: pointer;">
+                            <label class="checkbox-item" style="margin-bottom: 20px;">
+                                <input type="checkbox" id="confirm-person">
+                                <span class="checkbox-custom"></span>
                                 <span style="font-size: 1.1rem; color: #333;">I am the person in the image(s)/video(s)
                                     I've selected</span>
                             </label>
-                            <label class="checkbox-item" style="align-items: flex-start;">
-                                <input type="checkbox" id="confirm-age"
-                                    style="accent-color: #ea6c00; width: 20px; height: 20px; margin-right: 15px; margin-top: 2px; cursor: pointer;">
+                            <label class="checkbox-item">
+                                <input type="checkbox" id="confirm-age">
+                                <span class="checkbox-custom"></span>
                                 <span style="font-size: 1.1rem; color: #333;">I was over 18 when the image(s)/video(s)
                                     were taken</span>
                             </label>
