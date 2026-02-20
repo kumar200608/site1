@@ -8,6 +8,78 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check if Supabase JS library is loaded (from CDN) to prevent errors on pages without the script
     const supabase = window.supabase ? window.supabase.createClient(supabaseUrl, supabaseKey) : null;
 
+    // ===== THEME & MODE SWITCHER =====
+    const docEl = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'guardian-calm';
+    const savedMode = localStorage.getItem('mode') || 'light';
+
+    // Apply saved preferences on load
+    docEl.setAttribute('data-theme', savedTheme);
+    if (savedMode === 'dark') {
+        docEl.setAttribute('data-mode', 'dark');
+    }
+
+    // Dark Mode Toggle
+    const modeToggle = document.getElementById('theme-mode-toggle');
+    if (modeToggle) {
+        modeToggle.textContent = savedMode === 'dark' ? '☀️' : '🌙';
+        modeToggle.addEventListener('click', () => {
+            const currentMode = docEl.getAttribute('data-mode');
+            if (currentMode === 'dark') {
+                docEl.removeAttribute('data-mode');
+                localStorage.setItem('mode', 'light');
+                modeToggle.textContent = '🌙';
+            } else {
+                docEl.setAttribute('data-mode', 'dark');
+                localStorage.setItem('mode', 'dark');
+                modeToggle.textContent = '☀️';
+            }
+        });
+    }
+
+    // Theme Dropdown logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeList = document.getElementById('theme-list');
+
+    if (themeToggle && themeList) {
+        // Update active class on load
+        themeList.querySelectorAll('a').forEach(a => {
+            if (a.getAttribute('data-set-theme') === savedTheme) {
+                a.classList.add('active');
+            } else {
+                a.classList.remove('active');
+            }
+        });
+
+        themeToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            themeList.classList.toggle('open');
+            // Close language list if open
+            const langList = document.getElementById('lang-list');
+            if (langList) langList.classList.remove('open');
+        });
+
+        document.addEventListener('click', () => {
+            themeList.classList.remove('open');
+        });
+
+        themeList.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                e.preventDefault();
+                const selectedTheme = e.target.getAttribute('data-set-theme');
+                if (selectedTheme) {
+                    docEl.setAttribute('data-theme', selectedTheme);
+                    localStorage.setItem('theme', selectedTheme);
+
+                    // Update active styling
+                    themeList.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+                    e.target.classList.add('active');
+                }
+                themeList.classList.remove('open');
+            }
+        });
+    }
+
     // ===== LANGUAGE DROPDOWN =====
     const langToggle = document.getElementById('lang-toggle');
     const langList = document.getElementById('lang-list');
